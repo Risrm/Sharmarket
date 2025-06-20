@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Portfolio Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'var(--color-primary)',
+            secondary: 'var(--color-secondary)',
+            accent: 'var(--color-accent)',
+            neutral: 'var(--color-neutral)',
+            'base-100': 'var(--color-base-100)',
+            info: 'var(--color-info)',
+            success: 'var(--color-success)',
+            warning: 'var(--color-warning)',
+            error: 'var(--color-error)',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --color-primary: #3B82F6; /* Blue-500 */
+      --color-secondary: #10B981; /* Emerald-500 */
+      --color-accent: #F59E0B; /* Amber-500 */
+      --color-neutral: #4B5563; /* Gray-600 */
+      --color-base-100: #F9FAFB; /* Gray-50 */
+      --color-info: #0EA5E9; /* Sky-500 */
+      --color-success: #22C55E; /* Green-500 */
+      --color-warning: #F97316; /* Orange-500 */
+      --color-error: #EF4444; /* Red-500 */
+      --color-blue-100: #DBEAFE; /* For edit row highlight */
+      --color-gray-100: #F3F4F6; /* For sold row highlight */
+    }
+    body {
+      font-family: 'Inter', sans-serif; /* A clean, modern font */
+      background-color: var(--color-base-100);
+      color: var(--color-neutral);
+    }
+    /* Custom scrollbar for better aesthetics */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    .recharts-surface {
+      overflow: visible; /* Fix for labels getting cut off */
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "recharts": "https://esm.sh/recharts@^2.15.3",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "pdfjs-dist/": "https://esm.sh/pdfjs-dist@4.4.168/",
+    "@/App": "/App.tsx",
+    "@/components/StockScreener": "/components/StockScreener.tsx",
+    "@/components/AIChatbot": "/components/AIChatbot.tsx",
+    "@/components/AIDividendTracker": "/components/AIDividendTracker.tsx",
+    "@/components/PDFDeeperAnalysis": "/components/PDFDeeperAnalysis.tsx",
+    "@/components/MarketSentimentAnalyzer": "/components/MarketSentimentAnalyzer.tsx",
+    "@/components/PersonalizedNewsFeed": "/components/PersonalizedNewsFeed.tsx",
+    "@/components/PortfolioOptimizer": "/components/PortfolioOptimizer.tsx",
+    "@/components/AIConsolidatedBriefing": "/components/AIConsolidatedBriefing.tsx",
+    "@/components/WhatIfScenarioAnalyzer": "/components/WhatIfScenarioAnalyzer.tsx",
+    "@/components/FinancialGoalPlanner": "/components/FinancialGoalPlanner.tsx",
+    "@/components/StockComparator": "/components/StockComparator.tsx",
+    "@/components/PortfolioRiskAnalyzer": "/components/PortfolioRiskAnalyzer.tsx",
+    "@/components/Watchlist": "/components/Watchlist.tsx",
+    "@/components/HistoricalPerformanceChart": "/components/HistoricalPerformanceChart.tsx",
+    "@/components/Dashboard": "/components/Dashboard.tsx",
+    "@/components/InvestmentTable": "/components/InvestmentTable.tsx",
+    "@/components/AddInvestmentModal": "/components/AddInvestmentModal.tsx",
+    "@/components/NewsAnalysisModal": "/components/NewsAnalysisModal.tsx",
+    "@/components/TransactionHistory": "/components/TransactionHistory.tsx",
+    "@/components/MarketTrendsAnalyzer": "/components/MarketTrendsAnalyzer.tsx",
+    "@/components/AIChatGuide": "/components/AIChatGuide.tsx",
+    "@/components/charts/PortfolioSectorPieChart": "/components/charts/PortfolioSectorPieChart.tsx",
+    "@/components/charts/PortfolioStockBarChart": "/components/charts/PortfolioStockBarChart.tsx",
+    "@/components/icons/FilterIcon": "/components/icons/FilterIcon.tsx",
+    "@/components/icons/ChatBubbleOvalLeftEllipsisIcon": "/components/icons/ChatBubbleOvalLeftEllipsisIcon.tsx",
+    "@/components/icons/BanknotesIcon": "/components/icons/BanknotesIcon.tsx",
+    "@/components/icons/DocumentTextIcon": "/components/icons/DocumentTextIcon.tsx",
+    "@/components/icons/PaperAirplaneIcon": "/components/icons/PaperAirplaneIcon.tsx",
+    "@/components/icons/ClipboardListIcon": "/components/icons/ClipboardListIcon.tsx",
+    "@/components/icons/LightbulbIcon": "/components/icons/LightbulbIcon.tsx",
+    "@/components/icons/TrendingUpIcon": "/components/icons/TrendingUpIcon.tsx",
+    "@/components/icons/RssIcon": "/components/icons/RssIcon.tsx",
+    "@/components/icons/SparklesIcon": "/components/icons/SparklesIcon.tsx",
+    "@/components/icons/ScaleIcon": "/components/icons/ScaleIcon.tsx",
+    "@/components/icons/TargetIcon": "/components/icons/TargetIcon.tsx",
+    "@/components/icons/ChartLineIcon": "/components/icons/ChartLineIcon.tsx",
+    "@/components/icons/PlusIcon": "/components/icons/PlusIcon.tsx",
+    "@/components/icons/EditIcon": "/components/icons/EditIcon.tsx",
+    "@/components/icons/TrashIcon": "/components/icons/TrashIcon.tsx",
+    "@/components/icons/XIcon": "/components/icons/XIcon.tsx",
+    "@/components/icons/CheckIcon": "/components/icons/CheckIcon.tsx",
+    "@/components/icons/ArrowUpIcon": "/components/icons/ArrowUpIcon.tsx",
+    "@/components/icons/ArrowDownIcon": "/components/icons/ArrowDownIcon.tsx",
+    "@/components/icons/DollarSignIcon": "/components/icons/DollarSignIcon.tsx",
+    "@/components/icons/NewspaperIcon": "/components/icons/NewspaperIcon.tsx",
+    "@/components/icons/XCircleIcon": "/components/icons/XCircleIcon.tsx"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

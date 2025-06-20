@@ -1,0 +1,6 @@
+{
+  "name": "Investment Portfolio Dashboard",
+  "description": "A personal investment dashboard to track stock portfolios, manage finances, and plan investments. Includes portfolio overview, detailed investment tracking, and visualizations. Initial investment capital is LKR 40,000.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
